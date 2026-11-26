@@ -1,0 +1,804 @@
+:root {
+  --bg-paper: #722F37;
+  --envelope-dark: #c6a15f;
+  --envelope-mid: #F7E5C8;
+  --envelope-light: #e8d5b7;
+  --text-color: #141414;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: var(--bg-paper); /* Tono arena cálido base */
+  /* Textura realista de arena fina con relieve y granos */
+  background-image: 
+    /* 1. Iluminación suave tipo duna / luz natural */
+    radial-gradient(ellipse at 50% 35%, rgba(255, 250, 240, 0.55) 0%, transparent 65%),
+    radial-gradient(ellipse at 50% 55%, rgba(186, 162, 124, 0.25) 0%, transparent 70%),
+    /* 2. Relieve granular 3D de arena mediante iluminación SVG */
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='sandTexture'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.35' numOctaves='3' seed='12' stitchTiles='stitch' result='noise'/%3E%3CfeDiffuseLighting in='noise' lighting-color='%23f7eedc' surfaceScale='1.6' result='light'%3E%3CfeDistantLight azimuth='45' elevation='55'/%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23sandTexture)' opacity='0.42'/%3E%3C/svg%3E");
+  background-repeat: no-repeat, no-repeat, repeat;
+  background-size: 100% 100%, 100% 100%, 150px 150px;
+  font-family: 'Cinzel', serif;
+  overflow-x: hidden;
+  padding: 50px 20px 80px 20px;
+}
+
+.invitation-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 680px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Contenedor de la portada */
+.hero-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Encabezado tipográfico */
+.header-text {
+  text-align: center;
+  color: var(--text-color);
+  margin-bottom: 120px;
+  z-index: 10;
+}
+
+.title-line {
+  font-size: clamp(1.35rem, 3.5vw, 2.1rem);
+  font-weight: 400;
+  letter-spacing: 3px;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.script-initial {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(2.8rem, 6vw, 4.2rem);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 0.7;
+  display: inline-block;
+  transform: translateY(4px);
+  margin-right: 2px;
+}
+
+.script-amp {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(2.4rem, 5vw, 3.5rem);
+  margin: 0 8px;
+  display: inline-block;
+  transform: translateY(3px);
+}
+
+.event-date {
+  margin-top: 10px;
+  font-size: clamp(1.2rem, 3vw, 1.75rem);
+  letter-spacing: 4px;
+  font-weight: 400;
+}
+
+/* Contenedor principal del sobre */
+.envelope-scene {
+  position: relative;
+  width: 440px;
+  height: 310px;
+  margin-top: 60px;
+  /* Espacio inferior para que el ramo colgante no choque con lo que pongas debajo */
+  margin-bottom: 110px; 
+}
+
+/* =========================================================
+   IMAGEN 1: Superior derecha (Detrás del sobre y la tarjeta)
+   ========================================================= */
+.img-top-right {
+  position: absolute;
+  top: -175px;
+  right: -55px;
+  width: 185px;
+  z-index: 1;
+  pointer-events: none;
+  filter: drop-shadow(4px 8px 10px rgba(0, 0, 0, 0.15));
+}
+
+/* Solapa trasera del sobre */
+.envelope-back-flap {
+  position: absolute;
+  top: -125px;
+  left: 0;
+  width: 100%;
+  height: 130px;
+  background-color: var(--envelope-dark);
+  background-image:
+    radial-gradient(ellipse at 50% 35%, rgba(255, 250, 240, 0.28) 0%, transparent 65%),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='sandEnvelopeBack'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.35' numOctaves='3' seed='12' stitchTiles='stitch' result='noise'/%3E%3CfeDiffuseLighting in='noise' lighting-color='%23f7eedc' surfaceScale='1.6' result='light'%3E%3CfeDistantLight azimuth='45' elevation='55'/%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23sandEnvelopeBack)' opacity='0.38'/%3E%3C/svg%3E");
+  background-repeat: no-repeat, repeat;
+  background-size: 100% 100%, 150px 150px;
+  clip-path: polygon(0% 100%, 46% 6%, 50% 2%, 54% 6%, 100% 100%);
+  border-radius: 20px 20px 0 0;
+  z-index: 2;
+}
+/* Interior decorativo de la solapa */
+.envelope-liner {
+  position: absolute;
+  top: -112px;
+  left: 14px;
+  width: calc(100% - 28px);
+  height: 120px;
+  background-color: var(--envelope-light);
+  background-image:
+    radial-gradient(ellipse at 50% 40%, rgba(255, 250, 240, 0.45) 0%, transparent 70%),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='sandEnvelopeLiner'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.35' numOctaves='3' seed='12' stitchTiles='stitch' result='noise'/%3E%3CfeDiffuseLighting in='noise' lighting-color='%23f7eedc' surfaceScale='1.6' result='light'%3E%3CfeDistantLight azimuth='45' elevation='55'/%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23sandEnvelopeLiner)' opacity='0.42'/%3E%3C/svg%3E");
+  background-repeat: no-repeat, repeat;
+  background-size: 100% 100%, 150px 150px;
+  clip-path: polygon(0% 100%, 47% 6%, 50% 3%, 53% 6%, 100% 100%);
+  z-index: 3;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.25);
+}
+
+/* Cuerpo interior oscuro del sobre */
+.envelope-inside {
+  position: absolute;
+  inset: 0;
+  background-color: var(--envelope-mid);
+  box-shadow: 0 22px 38px rgba(0, 0, 0, 0.28);
+  z-index: 2;
+}
+
+/* Tarjeta / Fotografía que sale del sobre */
+.photo-card {
+  position: absolute;
+  top: -68px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 315px;
+  height: 290px;
+  background-color: #ffffff;
+  padding: 14px 14px 35px 14px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
+  z-index: 4;
+  transition: transform 0.4s ease;
+}
+
+.envelope-scene:hover .photo-card {
+  transform: translateX(-50%) translateY(-14px);
+}
+
+.photo-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  background-color: #dcdad3;
+}
+
+/* Pliegues frontales del sobre */
+.envelope-front {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.flap-left,
+.flap-right,
+.flap-bottom {
+  position: absolute;
+  inset: 0;
+  background-image:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='sandFlap'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.35' numOctaves='3' seed='12' stitchTiles='stitch' result='noise'/%3E%3CfeDiffuseLighting in='noise' lighting-color='%23f7eedc' surfaceScale='1.6' result='light'%3E%3CfeDistantLight azimuth='45' elevation='55'/%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23sandFlap)' opacity='0.42'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 150px 150px;
+}
+
+.flap-left {
+  background-color: var(--envelope-mid);
+  clip-path: polygon(0 0, 52% 52%, 0 100%);
+  filter: drop-shadow(3px 0 6px rgba(0, 0, 0, 0.25));
+}
+
+.flap-right {
+  background-color: var(--envelope-dark);
+  clip-path: polygon(100% 0, 48% 52%, 100% 100%);
+  filter: drop-shadow(-3px 0 6px rgba(0, 0, 0, 0.25));
+}
+
+.flap-bottom {
+  background-color: var(--envelope-light);
+  clip-path: polygon(0 100%, 45% 47%, 50% 44%, 55% 47%, 100% 100%);
+  filter: drop-shadow(0 -4px 8px rgba(0, 0, 0, 0.3));
+}
+
+/* =========================================================
+   IMAGEN 2: Inferior izquierda (Por delante del sobre)
+   ========================================================= */
+.img-bottom-left {
+  position: absolute;
+  bottom: -65px;
+  left: -105px;
+  width: 320px;
+  z-index: 6;
+  pointer-events: none;
+  filter: drop-shadow(5px 10px 12px rgba(0, 0, 0, 0.22));
+}
+
+/* =========================================================
+   SECCIONES INFERIORES (Scroll)
+   ========================================================= */
+.content-section {
+  width: 100%;
+  padding-top: 20px;
+  text-align: center;
+  color: var(--text-color);
+  /* Ejemplo de altura mínima mientras agregas más bloques */
+  min-height: 400px; 
+}
+
+.scroll-hint {
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  opacity: 0.7;
+}
+
+/* Adaptación responsiva para pantallas móviles */
+@media (max-width: 540px) {
+  .envelope-scene {
+    width: 310px;
+    height: 220px;
+    margin-bottom: 80px;
+  }
+  .photo-card {
+    width: 225px;
+    height: 210px;
+    top: -48px;
+    padding: 10px;
+  }
+  .envelope-back-flap {
+    top: -90px;
+    height: 95px;
+  }
+  .envelope-liner {
+    top: -80px;
+    height: 88px;
+  }
+  .img-top-right {
+    width: 145px;
+    top: -125px;
+    right: -25px;
+  }
+  .img-bottom-left {
+    width: 210px;
+    bottom: -45px;
+    left: -60px;
+  }
+}
+
+
+/* =========================================================
+   SECCIÓN 2: INVITACIÓN FORMAL (ESTILO REFERENCIA)
+   ========================================================= */
+.content-section {
+  --card-bg: #F4EDE2;
+  --celeste-claro: #A9BDD3;
+  --celeste-medio: #8CA4BF;
+  --celeste-oscuro: #5D7B9B;
+  --azul-marino: #1E3A5F;
+
+  width: 100%;
+  max-width: 410px;
+  padding-top: 20px;
+}
+
+.formal-card {
+  background-color: var(--card-bg);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='cardSand'%3E%3CfeTurbulence type='turbulence' baseFrequency='1.75' numOctaves='2' seed='8' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.40  0 0 0 0 0.34  0 0 0 0 0.24  0 0 0 0.14 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23cardSand)'/%3E%3C/svg%3E");
+  background-size: 100px 100px;
+  color: var(--azul-marino);
+  padding: 14px;
+  box-shadow: 0 10px 24px rgba(30, 58, 95, 0.12);
+  border: 1px solid rgba(140, 164, 191, 0.35);
+}
+
+
+
+.formal-card {
+  position: relative; /* Necesario para posicionar las imágenes en las esquinas */
+  background-color: #f3ead8;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='cardSand'%3E%3CfeTurbulence type='turbulence' baseFrequency='1.75' numOctaves='2' seed='8' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.40  0 0 0 0 0.34  0 0 0 0 0.24  0 0 0 0.14 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23cardSand)'/%3E%3C/svg%3E");
+  background-size: 100px 100px;
+  color: var(--azul-marino);
+  padding: 10px;
+  box-shadow: 0 10px 24px rgba(30, 58, 95, 0.12);
+  border: 1px solid rgba(140, 164, 191, 0.35);
+}
+
+/* Asegura que el contenido interno quede por encima de las imágenes si llegan a rozar */
+.formal-card-inner {
+  position: relative;
+  z-index: 2;
+  border: 1.5px solid var(--celeste-medio);
+  padding: 36px 32px;
+  text-align: center;
+}
+
+/* Imagen dentro de la tarjeta o sección */
+.card-img-top-left{
+  position: absolute;
+  width: 340px;      /* Cambia este valor para hacerla más grande o más pequeña */
+  height: auto;      /* Mantiene la proporción original */
+  max-width: none;   /* Evita que algún estilo general la limite */
+  z-index: 3;
+  pointer-events: none;
+  top: 0px;
+  left: 0px;
+}
+.card-img-bottom-right {
+  position: absolute;
+  bottom: clamp(-18px, -2.5vw, -10px);
+  right: 0;
+  width: clamp(160px, 42vw, 410px); /* Se adapta entre 160px en móvil y 360px en escritorio */
+  height: auto;
+  z-index: 3;
+  pointer-events: none;
+  
+}
+
+
+@media (max-width: 560px) {
+
+  .card-img-top-left {
+    top: 0px;
+    left: 0px;
+  }
+
+  .card-img-bottom-right {
+    width: clamp(140px, 90vw, 410px);
+    bottom: -18px;
+    right: 0;
+  }
+}
+
+
+
+.esfm-emblem {
+  width: 112px;
+  height: 112px;
+  margin: 0 auto 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.emblem-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Ajusta la imagen al tamaño sin recortarla ni deformarla */
+  display: block;
+}
+
+.formal-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(3rem, 7vw, 4.4rem);
+  font-weight: 400;
+  color: var(--azul-marino);
+  line-height: 1.05;
+  margin-bottom: 6px;
+}
+
+.botanical-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  max-width: 240px;
+  margin: 10px auto 22px;
+  color: var(--celeste-oscuro);
+}
+
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background-color: var(--celeste-medio);
+}
+
+.divider-leaf {
+  width: 48px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.formal-paragraph {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(1.08rem, 2.3vw, 1.24rem);
+  line-height: 1.58;
+  color: var(--azul-marino);
+  margin-bottom: 18px;
+}
+
+.formal-paragraph strong {
+  font-weight: 600;
+}
+
+/* Grid de DÍA / HORA / LUGAR */
+.event-details-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 26px 0 24px;
+  padding: 12px 0;
+  border-top: 1px solid rgba(140, 164, 191, 0.45);
+  border-bottom: 1px solid rgba(140, 164, 191, 0.45);
+}
+
+.detail-item {
+  padding: 6px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.detail-item + .detail-item {
+  border-left: 1px solid var(--celeste-medio);
+}
+
+.detail-icon {
+  width: 26px;
+  height: 26px;
+  color: var(--celeste-oscuro);
+  margin-bottom: 8px;
+}
+
+.detail-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.detail-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.78rem;
+  letter-spacing: 2.5px;
+  font-weight: 600;
+  color: var(--azul-marino);
+  margin-bottom: 6px;
+}
+
+.detail-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.35;
+  color: var(--azul-marino);
+}
+
+/* Firma final */
+.formal-signature {
+  margin-top: 8px;
+}
+
+.signature-script {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2.2rem;
+  color: var(--azul-marino);
+  line-height: 1.1;
+  margin-bottom: 8px;
+}
+
+.signature-org,
+.signature-institution {
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  letter-spacing: 1.5px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--azul-marino);
+}
+
+@media (max-width: 560px) {
+  .formal-card {
+    padding: 12px;
+  }
+
+  .formal-card-inner {
+    padding: 26px 16px;
+  }
+
+  .event-details-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .detail-item + .detail-item {
+    border-left: none;
+    border-top: 1px solid rgba(140, 164, 191, 0.35);
+    padding-top: 14px;
+  }
+}
+
+/* =========================================================
+   SECCIÓN 3: SOBRE, SELLO Y TARJETA DE UBICACIÓN
+   ========================================================= */
+.location-section {
+  width: 100%;
+  max-width: 520px;
+  padding-top: 90px;
+  padding-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.location-scene {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  padding-bottom: 10px;
+}
+
+/* Sobre trasero */
+.loc-envelope-back {
+  position: relative;
+  width: 78%;
+  height: 235px;
+  background-color: var(--envelope-dark);
+  border-radius: 4px;
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.18);
+  z-index: 1;
+}
+
+.loc-envelope-flap {
+  position: absolute;
+  inset: 0;
+  background-color: var(--envelope-light);
+  clip-path: polygon(0 0, 100% 0, 50% 62%);
+  filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.22));
+}
+
+/* Sello circular superpuesto */
+.loc-seal {
+  position: absolute;
+  top: 105px;
+  left: 38%;
+  transform: translateX(-50%);
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background-color: #c8a252;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.28);
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.loc-seal-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Tarjeta blanca */
+.loc-card {
+  position: relative;
+  width: 70%;
+  margin-left: auto;
+  margin-top: -90px;
+  background-color: #fbfaf7;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 140 140' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='cardPaper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='3' seed='19' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.45  0 0 0 0 0.40  0 0 0 0 0.32  0 0 0 0.08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23cardPaper)'/%3E%3C/svg%3E");
+  background-size: 140px 140px;
+  padding: 24px 20px 26px;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.16);
+  text-align: center;
+  z-index: 3;
+  border-radius: 15%;
+}
+
+.loc-card-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(0.82rem, 2.2vw, 0.98rem);
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: #1e242b;
+  margin-bottom: 6px;
+}
+
+.loc-card-meta {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(0.95rem, 2.4vw, 1.1rem);
+  color: #2c3540;
+  margin-bottom: 14px;
+}
+
+.loc-meta-separator {
+  margin: 0 6px;
+  font-style: normal;
+  opacity: 0.65;
+}
+
+/* Contenedor de la imagen de la ESFM */
+.loc-venue-box {
+  width: 100%;
+  max-width: 190px;
+  height: 118px;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.loc-venue-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* Botón pill de Ubicación */
+.loc-map-btn {
+  display: inline-block;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.05rem;
+  color: #1e242b;
+  text-decoration: none;
+  padding: 5px 28px;
+  border: 1.2px solid #1e242b;
+  border-radius: 999px;
+  background-color: transparent;
+  transition: background-color 0.25s ease, color 0.25s ease, transform 0.2s ease;
+}
+
+.loc-map-btn:hover {
+  background-color: #1e242b;
+  color: #fbfaf7;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 520px) {
+  .loc-envelope-back {
+    width: 82%;
+    height: 195px;
+  }
+
+  .loc-seal {
+    top: 80px;
+    left: 42%;
+    width: 64px;
+    height: 64px;
+  }
+
+  .loc-card {
+    width: 60%;
+    margin-top: -78px;
+    padding: 20px 14px 22px;
+    border-radius: 15%;
+  }
+
+  .loc-venue-box {
+    max-width: 155px;
+    height: 98px;
+  }
+}
+
+/* =========================================================
+   SECCIÓN 4: CUENTA REGRESIVA PERSISTENTE
+   ========================================================= */
+.countdown-section {
+  width: 100%;
+  max-width: 440px;
+  padding-top: clamp(16px, 4vw, 32px);
+  padding-bottom: 20px;
+}
+
+.countdown-card {
+  background-color: var(--card-bg);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='cardSand'%3E%3CfeTurbulence type='turbulence' baseFrequency='1.75' numOctaves='2' seed='8' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.40  0 0 0 0 0.34  0 0 0 0 0.24  0 0 0 0.14 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23cardSand)'/%3E%3C/svg%3E");
+  background-size: 100px 100px;
+  border: 1px solid rgba(198, 161, 95, 0.55);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.2);
+  padding: clamp(20px, 5vw, 28px) clamp(14px, 4vw, 24px);
+  text-align: center;
+  color: var(--azul-marino);
+}
+
+.countdown-kicker {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(1.1rem, 3vw, 1.3rem);
+  color: var(--azul-marino);
+  margin-bottom: 14px;
+}
+
+.countdown-grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(6px, 2vw, 12px);
+}
+
+.time-box {
+  flex: 1;
+  min-width: 0;
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid var(--celeste-medio);
+  padding: clamp(10px, 2.5vw, 14px) 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.time-value {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.35rem, 5vw, 2rem);
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--azul-marino);
+}
+
+.time-label {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(0.62rem, 1.8vw, 0.74rem);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--celeste-oscuro);
+  margin-top: 4px;
+}
+
+.time-sep {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.2rem, 4vw, 1.6rem);
+  font-weight: 600;
+  color: var(--envelope-dark);
+  transform: translateY(-6px);
+}
+
+.countdown-date-note {
+  margin-top: 14px;
+  font-family: 'Cinzel', serif;
+  font-size: clamp(0.7rem, 2vw, 0.8rem);
+  letter-spacing: 1.8px;
+  color: var(--celeste-oscuro);
+}
+
+.music-btn {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 50;
+  font-family: 'Cinzel', serif;
+  font-size: 0.78rem;
+  letter-spacing: 1.5px;
+  color: var(--azul-marino);
+  background-color: var(--card-bg);
+  border: 1px solid var(--envelope-dark);
+  border-radius: 999px;
+  padding: 8px 14px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.22);
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.music-btn:hover {
+  transform: translateY(-2px);
+}
