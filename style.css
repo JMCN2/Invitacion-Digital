@@ -196,7 +196,7 @@ body {
 }
 
 .letter-image {
-    width: auto;
+    width: 100px;
     max-width: min(55%, 110px);
     max-height: clamp(42px, 12vw, 85px);
     height: auto;
