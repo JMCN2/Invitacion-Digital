@@ -20,7 +20,9 @@
    RESET
 ================================= */
 
-* {
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -546,4 +548,31 @@ body {
         animation-duration: .01ms !important;
         transition-duration: .01ms !important;
     }
+}
+
+/* =================================
+   BOTÓN DE MÚSICA
+================================= */
+
+.music-btn {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    z-index: 50;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--gold);
+    background-color: var(--cream);
+    border: 1px solid var(--olive-dark);
+    border-radius: 999px;
+    padding: 8px 14px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.music-btn:hover {
+    transform: translateY(-2px);
 }
