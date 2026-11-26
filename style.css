@@ -464,16 +464,11 @@ body {
 
 .scene-caption {
     margin-top: 28px;
-
     font-family: 'Cormorant Garamond', serif;
-
     font-size: 16px;
     letter-spacing: 2px;
-
-    color: #62664f;
-
+    color: var(--cream);
     text-align: center;
-
     transition: opacity .5s ease;
 }
 
@@ -485,6 +480,9 @@ body {
 .envelope-wrapper.open .flap {
     transform: rotateX(180deg);
     z-index: 0;
+}
+.envelope-wrapper.open .seal-hint {
+    opacity: 0;
 }
 
 .envelope-wrapper.open .seal-button {
